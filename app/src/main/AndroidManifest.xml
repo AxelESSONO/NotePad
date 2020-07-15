@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name="com.obiangetfils.controller.NoteDetailActivity"></activity>
         <activity android:name="com.obiangetfils.controller.NoteListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
