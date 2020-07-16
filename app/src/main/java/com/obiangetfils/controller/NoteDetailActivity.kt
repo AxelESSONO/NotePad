@@ -22,6 +22,10 @@ class NoteDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_note_detail)
 
+        val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
         note = intent.getParcelableExtra<Note>(EXTRA_NOTE)
         noteIndex = intent.getIntExtra(EXTRA_NOTE_INDEX, -1)
         titleView = findViewById<TextView>(R.id.title)

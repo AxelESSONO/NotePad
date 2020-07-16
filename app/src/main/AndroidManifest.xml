@@ -9,7 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.obiangetfils.controller.NoteDetailActivity"></activity>
+
+        <activity
+            android:windowSoftInputMode="adjustResize"
+            android:name="com.obiangetfils.controller.NoteDetailActivity"
+            android:parentActivityName="com.obiangetfils.controller.NoteListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.obiangetfils.controller.NoteListActivity" />
+        </activity>
+
         <activity android:name="com.obiangetfils.controller.NoteListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
