@@ -3,6 +3,7 @@ package com.obiangetfils.notepad.controller
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,10 +29,6 @@ class NoteListActivity : AppCompatActivity(), View.OnClickListener {
 
         //Load List
         notes = mutableListOf<Note>()
-        notes.add(Note("Note 1", "Blablabla"))
-        notes.add(Note("Mémo Axel", "Futur grand développeur Android"))
-        notes.add(Note("Mémo Cédric", "Je serai indépendant"))
-        notes.add(Note("Travail à faire!", "Blablabla"))
 
         // configure RecyclerView
         adapter = NoteAdapter(notes, this)
@@ -87,7 +84,7 @@ class NoteListActivity : AppCompatActivity(), View.OnClickListener {
     fun showNoteDetail(noteIndex: Int) {
         val note = if (noteIndex < 0) Note() else notes[noteIndex]
         val intent = Intent(this, NoteDetailActivity::class.java)
-        intent.putExtra(NoteDetailActivity.EXTRA_NOTE, note)
+        intent.putExtra(NoteDetailActivity.EXTRA_NOTE, note as Parcelable)
         intent.putExtra(NoteDetailActivity.EXTRA_NOTE_INDEX, noteIndex)
         startActivityForResult(intent, NoteDetailActivity.REQUEST_EDIT_NOTE)
     }
