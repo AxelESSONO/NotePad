@@ -6,9 +6,11 @@ import android.os.Bundle
 import android.os.Parcelable
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import com.obiangetfils.notepad.R
 import com.obiangetfils.notepad.adapter.NoteAdapter
 import com.obiangetfils.notepad.model.Note
@@ -20,6 +22,7 @@ class NoteListActivity : AppCompatActivity(), View.OnClickListener {
 
     lateinit var notes: MutableList<Note>
     lateinit var adapter: NoteAdapter
+    lateinit var coordinatorLayout: CoordinatorLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +41,9 @@ class NoteListActivity : AppCompatActivity(), View.OnClickListener {
         val recyclerView = findViewById<RecyclerView>(R.id.note_recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
+
+        coordinatorLayout = findViewById<CoordinatorLayout>(R.id.coordinator_layout)
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -83,6 +89,7 @@ class NoteListActivity : AppCompatActivity(), View.OnClickListener {
         val note = notes.removeAt(noteIndex)
         deleteNote(this, note)
         adapter.notifyDataSetChanged()
+        Snackbar.make(coordinatorLayout, "${note.title} supprimé", Snackbar.LENGTH_SHORT).show()
     }
 
     fun showNoteDetail(noteIndex: Int) {
