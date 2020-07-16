@@ -12,6 +12,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.obiangetfils.notepad.R
 import com.obiangetfils.notepad.adapter.NoteAdapter
 import com.obiangetfils.notepad.model.Note
+import com.obiangetfils.notepad.utils.deleteNote
+import com.obiangetfils.notepad.utils.loadNotes
+import com.obiangetfils.notepad.utils.persistNote
 
 class NoteListActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -28,7 +31,7 @@ class NoteListActivity : AppCompatActivity(), View.OnClickListener {
         findViewById<FloatingActionButton>(R.id.create_note_fab).setOnClickListener(this)
 
         //Load List
-        notes = mutableListOf<Note>()
+        notes = loadNotes(this)
 
         // configure RecyclerView
         adapter = NoteAdapter(notes, this)
@@ -64,7 +67,7 @@ class NoteListActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun saveNote(note: Note, noteIndex: Int) {
-
+        persistNote(this, note)
         if (noteIndex < 0) {
             notes.add(0, note)
         } else {
@@ -78,6 +81,7 @@ class NoteListActivity : AppCompatActivity(), View.OnClickListener {
             return
         }
         val note = notes.removeAt(noteIndex)
+        deleteNote(this, note)
         adapter.notifyDataSetChanged()
     }
 
