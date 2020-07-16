@@ -1,5 +1,6 @@
 package com.obiangetfils.controller
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -37,14 +38,29 @@ class NoteListActivity : AppCompatActivity(), View.OnClickListener {
         val recyclerView = findViewById<RecyclerView>(R.id.note_recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
-
     }
 
-    override fun onClick(view: View) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
-        if (view.tag != null){
-            showNoteDetail(view.tag as Int)
+        if (resultCode != Activity.RESULT_OK || data == null){
+            return
         }
+        when(requestCode){
+            NoteDetailActivity.REQUEST_EDIT_NOTE -> processEditNoteResult(data)
+        }
+
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    private fun processEditNoteResult(data: Intent) {
+        val noteIndex = data.getIntExtra(NoteDetailActivity.EXTRA_NOTE_INDEX, -1)
+        val note = data.getParcelableExtra<Note>(NoteDetailActivity.EXTRA_NOTE)
+        saveNote(note, noteIndex)
+    }
+
+    private fun saveNote(note: Note, noteIndex: Int) {
+        notes[noteIndex] = note
+        adapter.notifyDataSetChanged()
     }
 
     fun showNoteDetail(noteIndex : Int){
@@ -52,7 +68,14 @@ class NoteListActivity : AppCompatActivity(), View.OnClickListener {
         val intent = Intent(this, NoteDetailActivity::class.java)
         intent.putExtra(NoteDetailActivity.EXTRA_NOTE, note)
         intent.putExtra(NoteDetailActivity.EXTRA_NOTE_INDEX, noteIndex)
-        startActivity(intent)
+        startActivityForResult(intent, NoteDetailActivity.REQUEST_EDIT_NOTE)
+    }
+
+    override fun onClick(view: View) {
+
+        if (view.tag != null){
+            showNoteDetail(view.tag as Int)
+        }
     }
 
 }
