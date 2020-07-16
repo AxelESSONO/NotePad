@@ -5,8 +5,13 @@
     <item
         android:id="@+id/action_save"
         app:showAsAction="always"
-        android:icon="@drawable/baseline_save_black_24"
-        android:iconTint="@android:color/white"
+        android:icon="@drawable/ic_save_24"
         android:title="Enregistrer" />
+
+    <item
+        android:id="@+id/action_delete"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_delete_24"
+        android:title="Supprimer" />
 
 </menu>

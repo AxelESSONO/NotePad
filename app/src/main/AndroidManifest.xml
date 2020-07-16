@@ -12,14 +12,14 @@
 
         <activity
             android:windowSoftInputMode="adjustResize"
-            android:name="com.obiangetfils.controller.NoteDetailActivity"
-            android:parentActivityName="com.obiangetfils.controller.NoteListActivity">
+            android:name="com.obiangetfils.notepad.controller.NoteDetailActivity"
+            android:parentActivityName="com.obiangetfils.notepad.controller.NoteListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.obiangetfils.controller.NoteListActivity" />
+                android:value="com.obiangetfils.notepad.controller.NoteListActivity" />
         </activity>
 
-        <activity android:name="com.obiangetfils.controller.NoteListActivity">
+        <activity android:name="com.obiangetfils.notepad.controller.NoteListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

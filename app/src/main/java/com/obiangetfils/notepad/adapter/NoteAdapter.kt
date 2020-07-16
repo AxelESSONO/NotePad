@@ -1,4 +1,4 @@
-package com.obiangetfils.adapter
+package com.obiangetfils.notepad.adapter
 
 import android.view.LayoutInflater
 import android.view.View
